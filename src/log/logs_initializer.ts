@@ -6,7 +6,7 @@ declare module globalThis {
 }
 
 const HOST_LOKI = process.env.HOST_LOKI || "http://localhost:3100";
-const APP_NAME = process.env.APP_NAME || "honeyshop";
+const APP_NAME = process.env.APP_NAME_LOG || "honeyshop";
 
 export const getLogger = () => {
 
