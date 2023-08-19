@@ -9,13 +9,13 @@ services:
         command: -config.file=/etc/loki/local-config.yaml
         networks:
             - back_net
-    promtail:
-        image: grafana/promtail:2.8.0
-        volumes:
-            - /var/log:/var/log
-        command: -config.file=/etc/promtail/config.yml
-        networks:
-            - back_net
+#    promtail:
+#        image: grafana/promtail:2.8.0
+#        volumes:
+#            - /var/log:/var/log
+#        command: -config.file=/etc/promtail/config.yml
+#        networks:
+#            - back_net
     grafana:
         image: grafana/grafana:latest
         ports:

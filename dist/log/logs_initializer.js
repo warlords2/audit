@@ -6,25 +6,24 @@ const winston_1 = require("winston");
 const LokiTransport = require("winston-loki");
 console.log(LokiTransport);
 const HOST_LOKI = process.env.HOST_LOKI || "http://localhost:3100";
-const APP_NAME = process.env.APP_NAME_LOG || "honeyshop";
-const options = ({
-    transports: [new LokiTransport({
-            host: HOST_LOKI,
-            labels: { app: APP_NAME },
-            json: true,
-            format: winston_1.format.json(),
-            replaceTimestamp: true,
-            onConnectionError: (err) => console.error(err)
-        }),
-        new winston_1.transports.Console({
-            format: winston_1.format.combine(winston_1.format.simple(), winston_1.format.colorize())
-        })]
-});
-const getLogger = () => {
+const APP_NAME_ENV = process.env.APP_NAME || process.env.APP_NAME_LOG || "honeyshop";
+const getLogger = (APP_NAME = APP_NAME_ENV) => {
     if (globalThis.logger)
         return globalThis.logger;
     else {
-        globalThis.logger = (0, winston_1.createLogger)(options);
+        globalThis.logger = (0, winston_1.createLogger)(({
+            transports: [new LokiTransport({
+                    host: HOST_LOKI,
+                    labels: { app: APP_NAME },
+                    json: true,
+                    format: winston_1.format.json(),
+                    replaceTimestamp: true,
+                    onConnectionError: (err) => console.error(err)
+                }),
+                new winston_1.transports.Console({
+                    format: winston_1.format.combine(winston_1.format.simple(), winston_1.format.colorize())
+                })]
+        }));
     }
     return globalThis.logger;
 };

@@ -1,8 +1,8 @@
 let dotenv  = require('dotenv');
 dotenv.config({path:'./.env'});
 
-export { getLogger } from './log/logs_initializer';
+import { getLogger } from './log/logs_initializer';
 
-/*
-getLogger().info("[data]")
-*/
+//getLogger().info("[data]")
+
+export { getLogger };
